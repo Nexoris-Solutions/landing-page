@@ -1,8 +1,11 @@
 import React from 'react'
+import Header from '../../components/Header/Header'
 
 function Landing() {
   return (
-    <div>Landing</div>
+    <div className='w-screen min-h-screen bg-white'>
+      <Header />
+    </div>
   )
 }
 
