@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Inter";
+  src: url("../assets/fonts/Inter_18pt-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/Poppins-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Unbound";
+  src: url("../assets/fonts/Unbounded-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+.font-inter {
+  font-family: "Inter", sans-serif;
+}
+
+.font-poppins {
+  font-family: "Poppins", sans-serif;
+}
+
+.font-unbound {
+  font-family: "Unbound", sans-serif;
+}
+
+* {
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  overflow-x: hidden;
+}
