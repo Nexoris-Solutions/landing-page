@@ -4,7 +4,7 @@ import "./styles.css";
 
 function Footer() {
 	return (
-		<footer>
+		<footer className="w-full mt-64">
 			<div className="footer-content">
 				{/* Brand Section */}
 				<div className="footer-section brand-section">
