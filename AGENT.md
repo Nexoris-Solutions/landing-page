@@ -24,3 +24,4 @@
 - React functional components with hooks
 - Import React explicitly in JSX files
 - Nested vanilla CSS
+- Use white and black theme unless and until mentioned
