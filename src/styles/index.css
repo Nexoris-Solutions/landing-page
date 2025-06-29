@@ -21,6 +21,13 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "montserratUnderline";
+  src: url("../assets/fonts/MontserratUnderline-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
 .font-inter {
   font-family: "Inter", sans-serif;
 }
@@ -31,6 +38,10 @@
 
 .font-unbound {
   font-family: "Unbound", sans-serif;
+}
+
+.font-montserratUnderline {
+  font-family: "montserratUnderline", sans-serif;
 }
 
 * {
