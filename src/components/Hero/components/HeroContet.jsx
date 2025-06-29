@@ -13,7 +13,7 @@ function HeroContet() {
           duration: 0.6,
           ease: "easeOut",
         }}
-        className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-unbound font-extrabold leading-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-blue-500"
+        className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-inter font-extrabold leading-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-blue-500"
         style={{
           backgroundSize: "200% 200%",
         }}
