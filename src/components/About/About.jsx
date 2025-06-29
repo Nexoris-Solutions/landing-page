@@ -1,231 +1,169 @@
-import React from "react";
-import {
-	FaStar,
-	FaTrophy,
-	FaRocket,
-	FaUsers,
-	FaGlobe,
-	FaLightbulb,
-	FaEye,
-	FaInfo,
-	FaBolt,
-	FaBullseye,
-	FaCode,
-	FaArrowRight,
-	FaShieldAlt,
-} from "react-icons/fa";
-import "./styles.css";
+import React, { useEffect, useRef, useState } from "react";
+import { motion, useInView, useMotionValue, animate } from "framer-motion";
+import { GiLaurelsTrophy } from "react-icons/gi";
+import { MdRocketLaunch } from "react-icons/md";
+import { HiUserGroup } from "react-icons/hi";
+import { TbWorld } from "react-icons/tb";
+import { BsLightbulbFill } from "react-icons/bs";
+import { RiEye2Line } from "react-icons/ri";
+import industry from "../../assets/industry.jpg";
+import star_top from "../../assets/star_top.webm";
+import star_top_idle from "../../assets/star_top-idle.png";
+// Stats data
+const stats = [
+	{ icon: GiLaurelsTrophy, number: 6, label: "Projects" },
+	{ icon: MdRocketLaunch, number: 10, label: "Clients" },
+	{ icon: HiUserGroup, number: 15, label: "Team Members" },
+	{ icon: TbWorld, number: 3, label: "Partners" },
+];
 
-function About() {
-	const statsData = [
-		{
-			icon: <FaTrophy />,
-			number: "6+",
-			label: "Successful Projects",
-			color: "trophy",
-		},
-		{
-			icon: <FaRocket />,
-			number: "10+",
-			label: "Happy Clients",
-			color: "rocket",
-		},
-		{
-			icon: <FaUsers />,
-			number: "15+",
-			label: "Expert Team Members",
-			color: "users",
-		},
-		{
-			icon: <FaGlobe />,
-			number: "3+",
-			label: "Tech Partners",
-			color: "globe",
-		},
-	];
+// Counter Component
+function AnimatedCounter({ from = 0, to = 100, duration = 2 }) {
+	const ref = useRef(null);
+	const inView = useInView(ref, { once: true });
+	const count = useMotionValue(from);
 
-	const leadershipData = [
-		{
-			name: "Mr. G. NARENDRAN",
-			title: "Founder & CEO",
-			description: "Visionary leader with 15+ years of experience in technology and business transformation.",
-			skills: ["Strategic Planning", "Business Development", "Technology Innovation"],
-			image: "placeholder",
-		},
-		{
-			name: "Harisudhan M",
-			title: "Co-founder & CTO",
-			description: "Tech innovator with expertise in AI, ML, and enterprise architecture.",
-			skills: ["AI/ML", "Cloud Architecture", "Tech Strategy"],
-			image: "placeholder",
-		},
-		{
-			name: "Anvin P Shibu",
-			title: "Co-founder & COO",
-			description: "Operations expert focused on scaling businesses and process optimization.",
-			skills: ["Operations", "Process Optimization", "Team Management"],
-			image: "placeholder",
-		},
-		{
-			name: "Arunmozhi Varman K",
-			title: "Co-founder & Technical Lead",
-			description: "Technical architect with deep expertise in enterprise solutions.",
-			skills: ["System Architecture", "Enterprise Solutions", "Technical Leadership"],
-			image: "placeholder",
-		},
-	];
+	useEffect(() => {
+		if (inView) {
+			const controls = animate(count, to, {
+				duration,
+				onUpdate: (v) => {
+					if (ref.current) ref.current.textContent = `${Math.floor(v)}+`;
+				},
+			});
+			return () => controls.stop();
+		}
+	}, [inView, count, to, duration]);
 
-	const valuesData = [
-		{
-			icon: <FaBolt />,
-			title: "Innovation First",
-			description: "Pushing boundaries with cutting-edge technology solutions.",
-			color: "innovation",
-		},
-		{
-			icon: <FaBullseye  />,
-			title: "Client Success",
-			description: "Dedicated to delivering exceptional value and results.",
-			color: "client",
-		},
-		{
-			icon: <FaCode />,
-			title: "Technical Excellence",
-			description: "Maintaining highest standards in code and architecture.",
-			color: "technical",
-		},
-		{
-			icon: <FaShieldAlt />,
-			title: "Security First",
-			description: "Ensuring robust security in every solution we deliver.",
-			color: "security",
-		},
-	];
-
-	return (
-		<section className="about-section">
-			{/* Header */}
-			<div className="about-header">
-				<h1 className="section-title">
-					<FaInfo className="info-icon" />
-					About Nexoris Solutions
-				</h1>
-				<p className="section-description">
-					Founded in 2024, Nexoris Solutions is a dynamic new force in digital transformation, bringing fresh
-					perspectives and innovative solutions to help businesses thrive in the digital age.
-				</p>
-			</div>
-
-			{/* Stats Section */}
-			<div className="stats-section">
-				{statsData.map((stat, index) => (
-					<div
-						key={index}
-						className={`stat-card ${stat.color}`}>
-						<div className="stat-icon">{stat.icon}</div>
-						<div className="stat-content">
-							<h3 className="stat-number">{stat.number}</h3>
-							<p className="stat-label">{stat.label}</p>
-						</div>
-					</div>
-				))}
-			</div>
-
-			{/* Mission & Vision Section */}
-			<div className="mission-vision-section">
-				<div className="mission-vision-content">
-					{/* Mission */}
-					<div className="mission-section">
-						<div className="section-header">
-							<FaLightbulb className="section-icon" />
-							<h2>Our Mission</h2>
-						</div>
-						<p>
-							At Nexoris Solutions, we're dedicated to accelerating digital transformation across industries. Our
-							mission is to empower businesses with innovative technology solutions that drive growth, efficiency, and
-							competitive advantage.
-						</p>
-					</div>
-
-					{/* Vision */}
-					<div className="vision-section">
-						<div className="section-header">
-							<FaEye className="section-icon" />
-							<h2>Our Vision</h2>
-						</div>
-						<p>
-							To be the global leader in delivering transformative technology solutions that shape the future of
-							businesses and create lasting positive impact.
-						</p>
-					</div>
-				</div>
-
-				{/* Team Image */}
-				<div className="team-image-section">
-					<div className="team-image-container">
-						<div className="team-image-placeholder">
-							<div className="team-text">
-								<h3>ENVISION A BETTER FUTURE</h3>
-								<p>Our dedicated team working together to bring innovative solutions to life</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			{/* Leadership Section */}
-			<div className="leadership-section">
-				<h2 className="leadership-title">Meet Our Leadership</h2>
-				<div className="leadership-grid">
-					{leadershipData.map((leader, index) => (
-						<div
-							key={index}
-							className="leader-card">
-							<div className="leader-image">
-								<div className="image-placeholder"></div>
-							</div>
-							<div className="leader-info">
-								<h3 className="leader-name">{leader.name}</h3>
-								<p className="leader-title">{leader.title}</p>
-								<p className="leader-description">{leader.description}</p>
-								<div className="leader-skills">
-									{leader.skills.map((skill, skillIndex) => (
-										<span
-											key={skillIndex}
-											className="skill-tag">
-											{skill}
-										</span>
-									))}
-								</div>
-							</div>
-						</div>
-					))}
-				</div>
-				<div className="supporters-button-container">
-					<button className="supporters-btn">
-						View Our Supporters
-						<FaArrowRight className="arrow-icon" />
-					</button>
-				</div>
-			</div>
-
-			{/* Values Section */}
-			<div className="values-section">
-				<h2 className="values-title">Our Values</h2>
-				<div className="values-grid">
-					{valuesData.map((value, index) => (
-						<div
-							key={index}
-							className={`value-card ${value.color}`}>
-							<div className="value-icon">{value.icon}</div>
-							<h3 className="value-title">{value.title}</h3>
-							<p className="value-description">{value.description}</p>
-						</div>
-					))}
-				</div>
-			</div>
-		</section>
-	);
+	return <span ref={ref} />;
 }
+
+const About = () => {
+	const [supportsWebM, setSupportsWebM] = useState(true);
+
+	useEffect(() => {
+		const video = document.createElement("video");
+		const canPlay = video.canPlayType('video/webm; codecs="vp9"');
+		setSupportsWebM(!!canPlay);
+	}, []);
+	return (
+		<section id="about" className="relative w-full min-h-screen bg-gradient-to-br from-indigo-950 via-blue-950 to-indigo-900 py-20 px-4 sm:px-6 lg:px-16 overflow-hidden text-white">
+			{/* Header */}
+			<motion.div className="text-center mb-20 max-w-7xl mx-auto">
+				<div className="relative flex flex-row items-center justify-center">
+					<div className="">
+						{supportsWebM ? (
+							<video
+								src={star_top}
+								className="w-16 sm:w-18 md:w-20 object-contain"
+								autoPlay
+								loop
+								muted
+								playsInline
+								aria-label="Animated top star"
+							/>
+						) : (
+							<img
+								src={star_top_idle}
+								alt="Star Top"
+								className="w-16 sm:w-18 md:w-20 object-contain"
+							/>
+						)}
+					</div>
+					<h2 className="text-4xl sm:text-5xl font-extrabold text-white">
+						About Nexoris
+					</h2>
+				</div>
+				<div className="h-1 w-32 bg-gradient-to-r from-indigo-400 to-blue-400 mx-auto mt-4 mb-6 rounded-full" />
+				<p className="text-lg sm:text-xl text-blue-100 max-w-3xl mx-auto">
+					Founded in 2024, Nexoris Solutions powers digital transformation through{" "}
+					<span className="text-blue-400 font-semibold">innovation</span> and{" "}
+					<span className="text-indigo-400 font-semibold">future-driven thinking</span>.
+				</p>
+			</motion.div>
+
+			{/* Stats */}
+			<div className="max-w-7xl mx-auto mb-24">
+				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+					{stats.map((s, i) => (
+						<motion.div
+							key={i}
+							initial={{ opacity: 0, y: 30 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							transition={{ delay: i * 0.1, duration: 0.6 }}
+							viewport={{ once: true }}
+							className="relative bg-white/5 border border-blue-100/10 backdrop-blur-lg p-6 rounded-3xl text-center shadow-lg hover:shadow-blue-500/30 transition-all"
+						>
+							<div className="text-5xl mb-4 text-white">{React.createElement(s.icon)}</div>
+							<h3 className={`text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-t from-blue-200 to-white`}>
+								<AnimatedCounter to={s.number} />
+							</h3>
+							<p className="text-blue-300 font-medium mt-1">{s.label}</p>
+						</motion.div>
+					))}
+				</div>
+			</div>
+			<div className="max-w-7xl mx-auto grid lg:grid-cols-3 gap-10 items-center text-white">
+				{/* Mission */}
+				<motion.div
+					initial={{ opacity: 0, x: -30 }}
+					whileInView={{ opacity: 1, x: 0 }}
+					transition={{ duration: 0.8 }}
+					className="backdrop-blur-lg bg-white/5 border border-white/10 rounded-3xl p-8"
+				>
+					<div className="flex items-center gap-4 mb-4">
+						<BsLightbulbFill className="text-white text-3xl bg-gradient-to-br from-blue-500 to-indigo-500 p-2 rounded-xl shadow" />
+						<h3 className="text-2xl font-bold bg-gradient-to-r from-blue-300 to-blue-500 bg-clip-text text-transparent">
+							Our Mission
+						</h3>
+					</div>
+					<p className="text-blue-100 text-lg leading-relaxed">
+						To empower businesses with{" "}
+						<span className="text-blue-300 font-semibold">tailored digital solutions</span> that drive{" "}
+						<span className="text-blue-200 font-semibold">growth</span>,{" "}
+						<span className="text-white font-semibold">resilience</span> and{" "}
+						<span className="text-indigo-300 font-semibold">innovation</span>.
+					</p>
+				</motion.div>
+
+				{/* Center Image */}
+				<motion.div
+					initial={{ opacity: 0, scale: 0.9 }}
+					whileInView={{ opacity: 1, scale: 1 }}
+					transition={{ duration: 0.8 }}
+					className="relative mx-auto lg:mx-0"
+				>
+					<div className="absolute -inset-4 bg-gradient-to-br from-blue-400/30 to-indigo-400/30 blur-2xl rounded-3xl" />
+					<img
+						src={industry}
+						alt="Innovation"
+						className="relative w-full h-80 object-cover rounded-3xl border border-white/20 shadow-xl"
+					/>
+				</motion.div>
+
+				{/* Vision */}
+				<motion.div
+					initial={{ opacity: 0, x: 30 }}
+					whileInView={{ opacity: 1, x: 0 }}
+					transition={{ duration: 0.8 }}
+					className="backdrop-blur-lg bg-white/5 border border-white/10 rounded-3xl p-8"
+				>
+					<div className="flex items-center gap-4 mb-4">
+						<RiEye2Line className="text-white text-3xl bg-gradient-to-br from-indigo-500 to-blue-500 p-2 rounded-xl shadow" />
+						<h3 className="text-2xl font-bold bg-gradient-to-r from-blue-300 to-blue-500 bg-clip-text text-transparent">
+							Our Vision
+						</h3>
+					</div>
+					<p className="text-blue-100 text-lg leading-relaxed">
+						To lead the world in delivering{" "}
+						<span className="text-blue-300 font-semibold">intelligent</span>,{" "}
+						<span className="text-indigo-200 font-semibold">scalable</span> and{" "}
+						<span className="text-white font-semibold">sustainable</span> technology solutions.
+					</p>
+				</motion.div>
+			</div>
+		</section >
+	);
+};
 
 export default About;

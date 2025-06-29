@@ -5,6 +5,9 @@ import Hero from "../../components/Hero/Hero";
 import Services from "../../components/Services/Services";
 import Contacts from "../../components/Contacts/Contacts";
 import About from "../../components/About/About";
+import Members from "../../components/Members/Members";
+
+
 function Landing() {
 	return (
 		<motion.div
@@ -16,6 +19,7 @@ function Landing() {
 			<Hero />
 			<About />
 			<Services />
+			<Members />
 			<Contacts />
 			<Footer />
 		</motion.div>
