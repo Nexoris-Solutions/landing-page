@@ -186,26 +186,32 @@ function Header() {
                     {item.icon}
                   </motion.button>
                 ))}
-                {socialItems.map((item) => (
+                {socialItems.map((item, index) => (
                   item.label !== "intro" ?
                     (
-                      <button
+                      <motion.button
                         key={item.label}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: (index + 5) * 0.1 }}
                         className="text-zinc-400 hover:text-white transition p-2 rounded-lg hover:bg-zinc-800"
                         title={item.label}
                         onClick={() => handleSocialClick(item.href)}
                       >
                         {item.icon}
-                      </button>
+                      </motion.button>
                     ) : (
-                      <button
+                      <motion.button
                         key={item.label}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: (index + 5) * 0.1 }}
                         className="text-zinc-400 hover:text-white transition p-2 rounded-lg hover:bg-zinc-800"
                         title={item.label}
                         onClick={handlePlayintro}
                       >
                         {item.icon}
-                      </button>
+                      </motion.button>
                     )
                 ))}
               </nav>
