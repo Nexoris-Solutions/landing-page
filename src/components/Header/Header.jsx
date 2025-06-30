@@ -13,12 +13,20 @@ import { useState } from "react";
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
+  const handleClick = (label) => {
+    const section = document.getElementById(label);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsOpen(false);
+  }
+
   const navItems = [
-    { icon: <RiHome2Line size={22} />, label: "Home" },
-    { icon: <RiUser3Line size={22} />, label: "About" },
-    { icon: <RiServiceLine size={22} />, label: "Services" },
-    { icon: <RiTeamLine size={22} />, label: "Members" },
-    { icon: <RiPhoneLine size={22} />, label: "Contact" },
+    { icon: <RiHome2Line size={22} />, label: "home" },
+    { icon: <RiUser3Line size={22} />, label: "about" },
+    { icon: <RiServiceLine size={22} />, label: "services" },
+    { icon: <RiTeamLine size={22} />, label: "members" },
+    { icon: <RiPhoneLine size={22} />, label: "contact" },
   ];
 
   return (
@@ -30,6 +38,7 @@ function Header() {
             key={item.label}
             className="text-zinc-300 hover:text-white transition p-2 rounded-lg hover:bg-zinc-800"
             title={item.label}
+            onClick={() => handleClick(item.label)}
           >
             {item.icon}
           </button>
@@ -90,7 +99,7 @@ function Header() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    onClick={() => setIsOpen(false)}
+                    onClick={() => handleClick(item.label)}
                     className="text-zinc-400 hover:text-white transition p-2 rounded-lg hover:bg-zinc-800"
                     title={item.label}
                   >

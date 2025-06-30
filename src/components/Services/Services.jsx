@@ -85,28 +85,36 @@ function Services() {
       id="services"
       className="relative w-full bg-zinc-50 max-w-7xl mx-auto px-4 py-10 min-h-screen"
     >
-      <div className="flex justify-between items-center w-full mb-12">
-        <h2 className="text-4xl md:text-5xl font-bold font-righteous text-gray-800">
+      <div className="flex flex-col md:flex-row justify-between items-center w-full mb-12">
+        <motion.h2
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1, delay: 0.2 }}
+          className="text-4xl md:text-5xl font-bold font-righteous text-gray-800">
           Explore Our Services
-        </h2>
-        <div className="text-md w-[550px] bg-blue-500 text-white p-2 rounded-xl flex flex-row justify-between">
-          <HiCheckBadge className="text-white text-7xl mr-4" />
+        </motion.h2>
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1, delay: 0.2 }}
+          className="relative text-md w-full md:w-1/3 bg-blue-500 text-white p-2 rounded-xl flex flex-row justify-between">
+          <HiCheckBadge className="text-white text-2xl absolute bottom-1 right-1" />
           <p className="text-md">
             Take a Look at our diverse range of services designed to empower your business with cutting-edge technology and innovative solutions.
           </p>
-        </div>
+        </motion.div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {services.map((service, index) => {
-            if (index === 4) {
+          if (index === 4) {
             // Render a separate box for index 4 with image overflowing on top
             return (
               <motion.div
                 key={index}
                 className="relative h-[280px] flex flex-col justify-end items-center bg-blue-500 border border-gray-200 rounded-2xl p-6 shadow-md hover:shadow-lg hover:scale-105 transition-all duration-500 ease-in-out cursor-pointer"
                 initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                animate={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ delay: index * 0.1, duration: 0.6 }}
               >
@@ -126,55 +134,55 @@ function Services() {
               </motion.div>
 
             );
-            }
+          }
           // Default card for other indexes
-            return (
+          return (
             <motion.div
               key={index}
-                className="relative overflow-clip flex flex-col justify-between h-full bg-white/70 backdrop-blur-md border border-gray-200 rounded-2xl p-6 shadow-md hover:shadow-xl  hover:scale-105 transition-all duration-500 ease-in-out cursor-pointer"
+              className="relative overflow-clip flex flex-col justify-between h-full bg-white/70 backdrop-blur-md border border-gray-200 rounded-2xl p-6 shadow-md hover:shadow-xl  hover:scale-105 transition-all duration-500 ease-in-out cursor-pointer"
               initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              animate={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ delay: index * 0.1, duration: 0.6 }}
             >
               {/* Index in Top-Right */}
               <div className="absolute top-4 right-4 text-sm font-semibold text-gray-400">
-              0{index + 1}
+                0{index + 1}
               </div>
 
               {/* Icon and Title */}
               <div className="relative z-20 bg-zinc-800 p-2 rounded-full text-white flex items-center mb-4 mr-6">
-              <div className="bg-blue-600 rounded-full p-3">
-                <service.icon className="text-white text-2xl" />
-              </div>
-              <h3 className="ml-2 text-md font-semibold text-white w-full">
-                {service.title}
-              </h3>
-              <p>
-                <BiArrowToRight className="text-white text-2xl w-5" />
-              </p>
+                <div className="bg-blue-600 rounded-full p-3">
+                  <service.icon className="text-white text-2xl" />
+                </div>
+                <h3 className="ml-2 text-md font-semibold text-white w-full">
+                  {service.title}
+                </h3>
+                <p>
+                  <BiArrowToRight className="text-white text-2xl w-5" />
+                </p>
               </div>
               {/* Bottom Line */}
               <div className="relative z-20 h-px bg-gray-200 mb-4" />
 
               {/* Description */}
               <p className="relative z-20 text-sm text-gray-700 mb-6 text-left">
-              {service.desc}
+                {service.desc}
               </p>
 
               {/* Feature Tags */}
               <div className="relative z-20 flex flex-wrap gap-2">
-              {service.features.map((feature, idx) => (
-                <span
-                key={idx}
-                className="bg-blue-100 text-blue-800 text-xs font-medium px-3 py-1 rounded-full hover:bg-blue-200 transition"
-                >
-                {feature}
-                </span>
-              ))}
+                {service.features.map((feature, idx) => (
+                  <span
+                    key={idx}
+                    className="bg-blue-100 text-blue-800 text-xs font-medium px-3 py-1 rounded-full hover:bg-blue-200 transition"
+                  >
+                    {feature}
+                  </span>
+                ))}
               </div>
             </motion.div>
-            );
+          );
         })}
       </div>
       <hr className="w-full border-t-2 border-black/10 my-6" />

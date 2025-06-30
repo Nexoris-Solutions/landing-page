@@ -62,20 +62,28 @@ export default function LeadershipTeam() {
 
   return (
     <section
-      id="leadership"
+      id="members"
       className="relative max-w-7xl mx-auto min-h-screen bg-white py-16 px-4"
     >
       {/* Header Section */}
-      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center w-full mb-12 gap-6">
-        <h2 className="order-1 text-4xl md:text-5xl font-bold font-righteous text-gray-800">
+      <div className="flex flex-col md:flex-row justify-between items-center w-full mb-12">
+        <motion.h2
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1, delay: 0.2 }}
+          className="text-4xl md:text-5xl font-bold font-righteous text-gray-800">
           Brains Behind the Build
-        </h2>
-        <div className="max-w-lg  bg-blue-500 text-white p-4 rounded-xl flex items-center gap-4">
-          <HiCheckBadge className="text-white text-6xl flex-shrink-0" />
-          <p className="text-sm leading-relaxed">
+        </motion.h2>
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1, delay: 0.2 }}
+          className="relative text-md w-full md:w-1/3 bg-blue-500 text-white p-2 rounded-xl flex flex-row justify-between">
+          <HiCheckBadge className="text-white text-2xl absolute bottom-1 right-1" />
+          <p className="text-md">
             The Brains Behind the Beta. From whiteboards to launchpads, this team codes the vision, engineers the future, and scales what matters.
           </p>
-        </div>
+        </motion.div>
       </div>
 
       {/* Leadership Cards Grid */}
@@ -127,7 +135,7 @@ export default function LeadershipTeam() {
                     </p>
                   </div>
 
-                  <hr className="w-full border-t-2 border-gray-200 mb-2"/>
+                  <hr className="w-full border-t-2 border-gray-200 mb-2" />
 
                   {/* Description */}
                   <div className="mb-4 flex-grow">
