@@ -90,14 +90,14 @@ function Services() {
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, delay: 0.2 }}
-          className="text-4xl md:text-5xl font-bold font-righteous text-gray-800">
+          className="text-4xl md:text-5xl font-bold leading-[1.2] font-poppins-bold text-gray-800">
           Explore Our Services
         </motion.h2>
         <motion.div
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, delay: 0.2 }}
-          className="relative text-md w-full md:w-1/3 bg-blue-500 text-white p-2 rounded-xl flex flex-row justify-between">
+          className="relative text-md mt-6 md:mt-0 py-4 w-full md:w-1/3 bg-blue-500 text-white p-2 rounded-xl flex flex-row justify-between">
           <HiCheckBadge className="text-white text-2xl absolute bottom-1 right-1" />
           <p className="text-md">
             Take a Look at our diverse range of services designed to empower your business with cutting-edge technology and innovative solutions.

@@ -15,6 +15,13 @@
 }
 
 @font-face {
+  font-family: "PoppinsBold";
+  src: url("../assets/fonts/Poppins-Bold.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
   font-family: "Unbound";
   src: url("../assets/fonts/Unbounded-Regular.ttf") format("truetype");
   font-weight: 400;
@@ -35,12 +42,23 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "archivo";
+  src: url("../assets/fonts/ArchivoBlack-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
 .font-inter {
   font-family: "Inter", sans-serif;
 }
 
 .font-poppins {
   font-family: "Poppins", sans-serif;
+}
+
+.font-poppins-bold {
+  font-family: "PoppinsBold", sans-serif;
 }
 
 .font-unbound {
@@ -53,6 +71,10 @@
 
 .font-righteous {
   font-family: "righteous", sans-serif;
+}
+
+.font-archivo {
+  font-family: "archivo", sans-serif;
 }
 
 * {

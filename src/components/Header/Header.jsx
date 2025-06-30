@@ -9,6 +9,7 @@ import {
 } from "react-icons/ri";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { RiLinkedinFill, RiInstagramLine, RiTwitterXLine, RiPlayCircleFill, RiYoutubeFill } from "react-icons/ri";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,12 +22,45 @@ function Header() {
     setIsOpen(false);
   }
 
+  const handleSocialClick = (href) => {
+    window.open(href, '_blank');
+    setIsOpen(false);
+  }
+
   const navItems = [
     { icon: <RiHome2Line size={22} />, label: "home" },
     { icon: <RiUser3Line size={22} />, label: "about" },
     { icon: <RiServiceLine size={22} />, label: "services" },
     { icon: <RiTeamLine size={22} />, label: "members" },
     { icon: <RiPhoneLine size={22} />, label: "contact" },
+  ];
+
+  const socialItems = [
+    {
+      icon: <RiLinkedinFill size={22} />,
+      label: "linkedin",
+      href: "https://www.linkedin.com/company/nexoris-solutions/posts/?feedView=all"
+    },
+    {
+      icon: <RiInstagramLine size={22} />,
+      label: "instagram",
+      href: "https://www.instagram.com/nexoris_solutions/"
+    },
+    {
+      icon: <RiTwitterXLine size={22} />,
+      label: "twitter",
+      href: "https://x.com/nexoris_solns"
+    },
+    {
+      icon: <RiYoutubeFill size={22} />,
+      label: "youtube",
+      href: "https://www.youtube.com/channel/UCC6T1_Vms4GpnmZiX_awXHA"
+    },
+    {
+      icon: <RiPlayCircleFill size={22} />,
+      label: "music",
+      href: "#play-music"
+    },
   ];
 
   return (
@@ -39,6 +73,20 @@ function Header() {
             className="text-zinc-300 hover:text-white transition p-2 rounded-lg hover:bg-zinc-800"
             title={item.label}
             onClick={() => handleClick(item.label)}
+          >
+            {item.icon}
+          </button>
+        ))}
+      </nav>
+
+      {/* Desktop Navbar - Vertical on right */}
+      <nav className="hidden lg:flex fixed top-1/2 left-4 -translate-y-1/2 z-50 bg-zinc-900/90 rounded-2xl shadow-lg py-6 px-3 flex-col gap-6 items-center">
+        {socialItems.map((item) => (
+          <button
+            key={item.label}
+            className="text-zinc-300 hover:text-white transition p-2 rounded-lg hover:bg-zinc-800"
+            title={item.label}
+            onClick={() => handleSocialClick(item.href)}
           >
             {item.icon}
           </button>

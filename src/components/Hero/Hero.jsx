@@ -20,12 +20,12 @@ function Hero() {
           className="col-span-2 sm:col-span-2 lg:col-span-3 sm:row-span-2 h-32 sm:h-auto bg-gradient-to-br from-zinc-800 to-zinc-900 rounded-2xl flex items-center justify-center relative overflow-hidden group"
         >
           <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          <h1 className="font-righteous text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white relative z-10 text-center leading-tight">
+          <h1 className="font-poppins-bold text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-normal text-white relative z-10 text-center leading-tight">
             NEXORIS <br /> SOLUTIONS
           </h1>
           <div className="absolute top-4 right-4 w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
           <div className="absolute bottom-6 left-6 flex space-x-1">
-            {[...Array(7)].map((_, i) => (
+            {[...Array(5)].map((_, i) => (
               <motion.div
                 key={i}
                 animate={{ opacity: [0.3, 1, 0.3] }}
@@ -47,10 +47,11 @@ function Hero() {
           <motion.div
             animate={{ rotate: [0, 360] }}
             transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-            className="absolute bottom-4 right-4 text-2xl text-white/40"
+            className="absolute z-10 bottom-4 right-4 text-2xl text-white/40"
           >
             <FiGlobe />
           </motion.div>
+          <div className="absolute inset-0 bg-gradient-to-tl from-blue-700 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
           <div className="relative z-10">
             <p className="text-xs md:text-sm font-mono text-white/80 mb-2">FUNCTION.INIT()</p>
@@ -117,7 +118,7 @@ function Hero() {
           className="col-span-2 sm:col-span-2 lg:col-span-2 h-32 sm:h-auto bg-gradient-to-br from-zinc-800 to-zinc-900 rounded-2xl flex items-center justify-center relative overflow-hidden group"
         >
           <div className="absolute inset-0 bg-gradient-to-l from-orange-400/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          <h1 className="font-righteous text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white relative z-10 text-center">
+          <h1 className="font-poppins-bold text-3xl md:text-4xl lg:text-5xl xl:text-[3.3rem] font-bold text-white relative z-10 text-center">
             INNOVATION
           </h1>
           <div className="absolute top-4 left-4 w-2 h-2 bg-orange-400 rounded-full animate-pulse"></div>
@@ -147,6 +148,7 @@ function Hero() {
             </h3>
             <p className="text-sm text-white/80">UPTIME</p>
           </div>
+          <div className="absolute inset-0 bg-gradient-to-tl from-purple-800 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           <motion.div
             animate={{
               scale: [1, 1.3, 1],
@@ -166,7 +168,7 @@ function Hero() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="col-span-1 sm:col-span-3 lg:col-span-4 h-32 sm:h-auto bg-[#0095ff] rounded-2xl p-3 sm:p-6 flex items-center justify-between relative overflow-hidden group"
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-zinc-800/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <div className="absolute inset-0 bg-gradient-to-tl from-blue-700 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           <div className="relative z-10">
             <span className="text-xs font-mono text-white/80 block mb-2">NEXORIS.CORE</span>
             <h3 className="text-sm md:text-xl lg:text-2xl font-bold text-white mb-2">UNLEASHING POTENTIAL</h3>
@@ -284,9 +286,9 @@ function Hero() {
           transition={{ duration: 0.8, delay: 1.0 }}
           className="col-span-2 sm:col-span-2 lg:col-span-2 h-32 sm:h-auto bg-gradient-to-br from-[#0095ff] to-[#0095ff] md:from-orange-400 md:to-orange-500 rounded-2xl flex items-center justify-center relative overflow-hidden group"
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-orange-400/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          <h1 className="font-righteous text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white relative z-10 text-center">
-            DIGITAL <span className="md:hidden font-righteous text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold">COMPANY</span>
+          <div className="absolute inset-0 bg-gradient-to-tl from-orange-700 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <h1 className="font-poppins-bold text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white relative z-10 text-center">
+            DIGITAL <span className="md:hidden font-poppins-bold text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold">COMPANY</span>
           </h1>
           <div className="absolute top-4 left-4 flex space-x-2">
             <motion.div
@@ -330,9 +332,10 @@ function Hero() {
           >
             <AiOutlineThunderbolt />
           </motion.div>
-          <h1 className="font-righteous text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white relative z-10 text-center">
+          <h1 className="font-poppins-bold text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white relative z-10 text-center">
             COMPANY
           </h1>
+          <div className="absolute inset-0 bg-gradient-to-tl from-blue-700 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           <div className="absolute top-4 right-4 flex space-x-2">
             <motion.div
               animate={{ opacity: [0.3, 1, 0.3] }}

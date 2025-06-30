@@ -23,14 +23,14 @@ function About() {
 					initial={{ opacity: 0, x: -30 }}
 					animate={{ opacity: 1, x: 0 }}
 					transition={{ duration: 1, delay: 0.2 }}
-					className="text-4xl md:text-5xl font-bold font-righteous text-gray-800">
+					className="text-4xl md:text-5xl leading-[1.2] font-bold font-poppins-bold text-gray-800 md:w-2/3">
 					We Help Businesses Grow Through Tech
 				</motion.h2>
 				<motion.div
 					initial={{ opacity: 0, x: 30 }}
 					animate={{ opacity: 1, x: 0 }}
 					transition={{ duration: 1, delay: 0.2 }}
-					className="relative text-md w-full md:w-1/3 bg-blue-500 text-white p-2 rounded-xl flex flex-row justify-between">
+					className="relative text-md w-full mt-6 md:mt-0 md:w-1/3 bg-blue-500 text-white p-2 py-4 rounded-xl flex flex-row justify-between">
 					<HiCheckBadge className="text-white text-2xl absolute bottom-1 right-1" />
 					<p className="text-md">
 						Founded in 2024, Nexoris Solutions is a dynamic new force in digital transformation, bringing fresh perspectives and innovative solutions to help businesses thrive in the digital age.
