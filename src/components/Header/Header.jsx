@@ -10,9 +10,11 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { RiLinkedinFill, RiInstagramLine, RiTwitterXLine, RiPlayCircleFill, RiYoutubeFill } from "react-icons/ri";
+import intro from "../../assets/mp3/intro.mp3";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [playIntro, setPlayIntro] = useState(false);
 
   const handleClick = (label) => {
     const section = document.getElementById(label);
@@ -25,6 +27,23 @@ function Header() {
   const handleSocialClick = (href) => {
     window.open(href, '_blank');
     setIsOpen(false);
+  }
+
+  const handlePlayintro = () => {
+    let audio = document.getElementById("intro-audio");
+    if (!audio) {
+      audio = new Audio(intro);
+      audio.id = "intro-audio";
+      document.body.appendChild(audio);
+    }
+    if (audio) {
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    }
+    setPlayIntro(!playIntro);
   }
 
   const navItems = [
@@ -47,18 +66,18 @@ function Header() {
       href: "https://www.instagram.com/nexoris_solutions/"
     },
     {
-      icon: <RiTwitterXLine size={22} />,
-      label: "twitter",
-      href: "https://x.com/nexoris_solns"
-    },
-    {
       icon: <RiYoutubeFill size={22} />,
       label: "youtube",
       href: "https://www.youtube.com/channel/UCC6T1_Vms4GpnmZiX_awXHA"
     },
     {
+      icon: <RiTwitterXLine size={22} />,
+      label: "twitter",
+      href: "https://x.com/nexoris_solns"
+    },
+    {
       icon: <RiPlayCircleFill size={22} />,
-      label: "music",
+      label: "intro",
       href: "#play-music"
     },
   ];
@@ -68,6 +87,7 @@ function Header() {
       {/* Desktop Navbar - Vertical on right */}
       <nav className="hidden lg:flex fixed top-1/2 right-4 -translate-y-1/2 z-50 bg-zinc-900/90 rounded-2xl shadow-lg py-6 px-3 flex-col gap-6 items-center">
         {navItems.map((item) => (
+
           <button
             key={item.label}
             className="text-zinc-300 hover:text-white transition p-2 rounded-lg hover:bg-zinc-800"
@@ -82,14 +102,26 @@ function Header() {
       {/* Desktop Navbar - Vertical on right */}
       <nav className="hidden lg:flex fixed top-1/2 left-4 -translate-y-1/2 z-50 bg-zinc-900/90 rounded-2xl shadow-lg py-6 px-3 flex-col gap-6 items-center">
         {socialItems.map((item) => (
-          <button
-            key={item.label}
-            className="text-zinc-300 hover:text-white transition p-2 rounded-lg hover:bg-zinc-800"
-            title={item.label}
-            onClick={() => handleSocialClick(item.href)}
-          >
-            {item.icon}
-          </button>
+          item.label !== "intro" ?
+            (
+              <button
+                key={item.label}
+                className="text-zinc-300 hover:text-white transition p-2 rounded-lg hover:bg-zinc-800"
+                title={item.label}
+                onClick={() => handleSocialClick(item.href)}
+              >
+                {item.icon}
+              </button>
+            ) : (
+              <button
+                key={item.label}
+                className="text-zinc-300 hover:text-white transition p-2 rounded-lg hover:bg-zinc-800"
+                title={item.label}
+                onClick={handlePlayintro}
+              >
+                {item.icon}
+              </button>
+            )
         ))}
       </nav>
 
@@ -153,6 +185,28 @@ function Header() {
                   >
                     {item.icon}
                   </motion.button>
+                ))}
+                {socialItems.map((item) => (
+                  item.label !== "intro" ?
+                    (
+                      <button
+                        key={item.label}
+                        className="text-zinc-400 hover:text-white transition p-2 rounded-lg hover:bg-zinc-800"
+                        title={item.label}
+                        onClick={() => handleSocialClick(item.href)}
+                      >
+                        {item.icon}
+                      </button>
+                    ) : (
+                      <button
+                        key={item.label}
+                        className="text-zinc-400 hover:text-white transition p-2 rounded-lg hover:bg-zinc-800"
+                        title={item.label}
+                        onClick={handlePlayintro}
+                      >
+                        {item.icon}
+                      </button>
+                    )
                 ))}
               </nav>
             </motion.aside>
