@@ -1,63 +1,108 @@
-import { RiCloseLine, RiMenu2Fill } from "react-icons/ri";
+import {
+  RiHome2Line,
+  RiUser3Line,
+  RiServiceLine,
+  RiTeamLine,
+  RiPhoneLine,
+  RiCloseLine,
+  RiMenu2Fill,
+} from "react-icons/ri";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const toggleMenu = () => setIsOpen(!isOpen);
-
-  const navItems = ["Home", "About", "Services", "Members", "Contact"];
+  const navItems = [
+    { icon: <RiHome2Line size={22} />, label: "Home" },
+    { icon: <RiUser3Line size={22} />, label: "About" },
+    { icon: <RiServiceLine size={22} />, label: "Services" },
+    { icon: <RiTeamLine size={22} />, label: "Members" },
+    { icon: <RiPhoneLine size={22} />, label: "Contact" },
+  ];
 
   return (
-    <header className="fixed top-0 left-0 z-50 w-full bg-white/20 backdrop-blur-md border-b border-black/10 shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-        <div className="text-2xl font-semibold text-black/80 font-montserratUnderline">
-          NEXORIS
-        </div>
+    <>
+      {/* Desktop Navbar - Vertical on right */}
+      <nav className="hidden lg:flex fixed top-1/2 right-4 -translate-y-1/2 z-50 bg-zinc-900/90 rounded-2xl shadow-lg py-6 px-3 flex-col gap-6 items-center">
+        {navItems.map((item) => (
+          <button
+            key={item.label}
+            className="text-zinc-300 hover:text-white transition p-2 rounded-lg hover:bg-zinc-800"
+            title={item.label}
+          >
+            {item.icon}
+          </button>
+        ))}
+      </nav>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex space-x-6">
-          {navItems.map((item, index) => (
-            <button
-              key={index}
-              className="text-black/70 hover:text-black transition duration-200"
-            >
-              {item}
-            </button>
-          ))}
-        </nav>
-
-        {/* Mobile Menu Button */}
-        <button
-          onClick={toggleMenu}
-          className="md:hidden p-2 rounded hover:bg-black/10 transition"
+      {/* Trigger for mobile */}
+      <div className="fixed top-4 right-4 z-50 lg:hidden">
+        <motion.button
+          onClick={() => setIsOpen(true)}
+          className="p-3 rounded-full bg-zinc-800 text-white shadow-md hover:bg-zinc-700 transition"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
         >
-          {isOpen ? (
-            <RiCloseLine className="text-2xl text-black/70" />
-          ) : (
-            <RiMenu2Fill className="text-2xl text-black/70" />
-          )}
-        </button>
+          <RiMenu2Fill size={20} />
+        </motion.button>
       </div>
 
-      {/* Mobile Nav Menu */}
-      <div
-        className={`md:hidden transition-all duration-300 overflow-hidden bg-white/90 backdrop-blur-md border-t border-black/10 ${isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-          }`}
-      >
-        <nav className="flex flex-col p-4 space-y-2">
-          {navItems.map((item, index) => (
-            <button
-              key={index}
-              className="text-left w-full px-2 py-2 text-black/70 hover:bg-black/10 rounded transition"
-              onClick={() => setIsOpen(false)} // optional: close on click
+      {/* Slide-In Panel for mobile */}
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.4 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsOpen(false)}
+              className="fixed inset-0 bg-black z-40"
+            />
+
+            {/* Sidebar */}
+            <motion.aside
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              className="fixed top-0 right-0 h-full w-20 bg-zinc-900 z-50 shadow-2xl flex flex-col items-center py-6"
             >
-              {item}
-            </button>
-          ))}
-        </nav>
-      </div>
-    </header>
+              {/* Vertical Label */}
+              <div className="absolute -left-10 top-1/2 -translate-y-1/2 rotate-90 text-sm text-zinc-500 tracking-wider">
+                Navigation
+              </div>
+
+              {/* Close Button */}
+              <button
+                onClick={() => setIsOpen(false)}
+                className="mb-8 p-2 text-zinc-400 hover:text-white transition"
+              >
+                <RiCloseLine size={20} />
+              </button>
+
+              {/* Nav Icons */}
+              <nav className="flex flex-col gap-6 mt-4">
+                {navItems.map((item, index) => (
+                  <motion.button
+                    key={item.label}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    onClick={() => setIsOpen(false)}
+                    className="text-zinc-400 hover:text-white transition p-2 rounded-lg hover:bg-zinc-800"
+                    title={item.label}
+                  >
+                    {item.icon}
+                  </motion.button>
+                ))}
+              </nav>
+            </motion.aside>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
 
