@@ -1,149 +1,185 @@
 import React, { useEffect, useState } from "react";
-import { motion } from 'framer-motion';
-import { FaCode, FaChartLine, FaCloud, FaSyncAlt, FaMobileAlt, FaShieldAlt } from 'react-icons/fa';
-import star_top from "../../assets/star_top.webm";
-import star_top_idle from "../../assets/star_top-idle.png";
+import { motion } from "framer-motion";
+import {
+  FaCode,
+  FaChartLine,
+  FaCloud,
+  FaSyncAlt,
+  FaMobileAlt,
+  FaShieldAlt,
+  FaMicrochip,
+  FaLock,
+} from "react-icons/fa";
+import atom from "../../assets/atom.png";
+import { HiCheckBadge } from "react-icons/hi2";
+import { BiArrowToRight } from "react-icons/bi";
+
 
 const services = [
   {
     title: "Custom Software Development",
     icon: FaCode,
-    desc: "Build bespoke software solutions tailored to your business needs, enabling streamlined operations and scalable growth.",
-    features: ["Web Applications", "Enterprise Solutions", "API Integrations", "Legacy Modernization"]
+    desc: "Tailored software solutions that streamline your workflows and drive scalable innovation.",
+    features: ["Web Apps", "Enterprise Systems", "API Integrations", "Modernization"],
   },
   {
-    title: "Data Analytics & Business Intelligence",
+    title: "Data Analytics & BI",
     icon: FaChartLine,
-    desc: "Turn raw data into powerful insights with interactive dashboards and predictive models that drive informed decision-making.",
-    features: ["Predictive Analytics", "Data Visualization", "BI Dashboards", "Real-Time Reporting"]
+    desc: "Gain actionable insights from data with powerful dashboards and predictive models.",
+    features: ["Data Vizualization", "Dashboards", "Predictive Models", "Reporting"],
   },
   {
     title: "Cloud Services",
     icon: FaCloud,
-    desc: "Harness the power of the cloud with secure, cost-effective, and future-ready infrastructure tailored for your business.",
-    features: ["Cloud Migration", "Infrastructure Setup", "Cloud Security", "Optimization & Scaling"]
+    desc: "Scalable, secure, and optimized cloud infrastructure aligned with your business goals.",
+    features: ["Migration", "Security", "Optimization", "Setup"],
   },
   {
     title: "Digital Transformation",
     icon: FaSyncAlt,
-    desc: "Reimagine your business processes through end-to-end digital innovation, automation, and strategic change management.",
-    features: ["Workflow Automation", "Digital Strategy", "Technology Consulting", "Change Enablement"]
+    desc: "Transform operations with strategy-driven automation and end-to-end digital enablement.",
+    features: ["Automation", "Consulting", "Change Mgmt", "Strategy"],
+  },
+  {
+    title: "Image display",
+    icon: FaMobileAlt,
+    desc: "Modern mobile apps crafted for exceptional performance and cross-platform compatibility.",
+    features: ["iOS", "Android", "Cross-Platform", "Maintenance"],
   },
   {
     title: "Mobile App Development",
     icon: FaMobileAlt,
-    desc: "Create high-performance mobile apps that deliver seamless user experiences across iOS, Android, and cross-platform devices.",
-    features: ["iOS Development", "Android Development", "Cross-Platform Apps", "App Maintenance"]
+    desc: "Modern mobile apps crafted for exceptional performance and cross-platform compatibility.",
+    features: ["iOS", "Android", "Cross-Platform", "Maintenance"],
   },
   {
     title: "AI & Machine Learning",
     icon: FaShieldAlt,
-    desc: "Empower your business with intelligent systems that automate, predict, and adapt—driven by cutting-edge AI and ML technologies.",
-    features: ["Natural Language Processing", "Computer Vision", "Recommender Systems", "AutoML Solutions"]
-  }
-]
+    desc: "Integrate smart solutions with AI/ML to automate, optimize, and intelligently adapt.",
+    features: ["NLP", "Computer Vision", "Recommenders", "AutoML"],
+  },
+  {
+    title: "Internet of Things (IoT)",
+    icon: FaMicrochip,
+    desc: "Connect and manage smart devices for real-time monitoring, automation, and data-driven control.",
+    features: ["Sensor Integration", "Edge Computing", "Device Management", "IoT Analytics"],
+  },
+  {
+    title: "Cybersecurity Solutions",
+    icon: FaLock,
+    desc: "Protect your digital assets with advanced security strategies, monitoring, and threat prevention.",
+    features: ["Network Security", "Threat Detection", "Compliance", "Penetration Testing"],
+  },
+];
 
 function Services() {
   const [supportsWebM, setSupportsWebM] = useState(true);
 
   useEffect(() => {
     const video = document.createElement("video");
-    const canPlay = video.canPlayType('video/webm; codecs="vp9"');
-    setSupportsWebM(!!canPlay);
+    setSupportsWebM(!!video.canPlayType('video/webm; codecs="vp9"'));
   }, []);
+
   return (
-    <section id="services" className="relative w-full bg-gradient-to-br from-white via-blue-50/30 to-indigo-50/50 py-24 px-6 md:px-12 overflow-hidden">
-      <div className="relative z-10 max-w-7xl mx-auto text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="mb-20"
-        >
-          <div className="relative flex flex-row items-center justify-center">
-
-            <motion.h2 initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0, backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
-              transition={{
-                delay: 0.3,
-                duration: 0.6,
-                ease: "easeOut",
-              }}
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-unbound font-extrabold leading-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-blue-500"
-              style={{
-                backgroundSize: "200% 200%",
-              }}>
-              Services We Offer
-            </motion.h2>
-            <div className="">
-              {supportsWebM ? (
-                <video
-                  src={star_top}
-                  className="w-16 sm:w-18 md:w-20 object-contain"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  aria-label="Animated top star"
-                />
-              ) : (
-                <img
-                  src={star_top_idle}
-                  alt="Star Top"
-                  className="w-16 sm:w-18 md:w-20 object-contain"
-                />
-              )}
-            </div>
-          </div>
-          <motion.div
-            className="h-1 w-24 bg-gradient-to-r from-blue-500 to-indigo-600 mx-auto mb-8 rounded-full"
-            initial={{ width: 0 }}
-            whileInView={{ width: 96 }}
-            transition={{ duration: 1, delay: 0.5 }}
-            viewport={{ once: true }}
-          />
-          <p className="text-xl text-gray-700 mb-4 max-w-3xl mx-auto leading-relaxed">
-            Crafted to empower your business with <span className="text-blue-600 font-semibold">cutting-edge technology</span> and <span className="text-indigo-600 font-semibold">innovation</span>.
+    <section
+      id="services"
+      className="relative w-full bg-zinc-50 max-w-7xl mx-auto px-4 py-10 min-h-screen"
+    >
+      <div className="flex justify-between items-center w-full mb-12">
+        <h2 className="text-4xl md:text-5xl font-bold font-righteous text-gray-800">
+          Explore Our Services
+        </h2>
+        <div className="text-md w-[550px] bg-blue-500 text-white p-2 rounded-xl flex flex-row justify-between">
+          <HiCheckBadge className="text-white text-7xl mr-4" />
+          <p className="text-md">
+            Take a Look at our diverse range of services designed to empower your business with cutting-edge technology and innovative solutions.
           </p>
-        </motion.div>
+        </div>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => {
-            const Icon = service.icon
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {services.map((service, index) => {
+            if (index === 4) {
+            // Render a separate box for index 4 with image overflowing on top
             return (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 50, scale: 0.9 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                whileHover={{ scale: 1.02, y: -5, rotateX: 2, rotateY: 2 }}
-                transition={{ delay: index * 0.1, duration: 0.6, type: "spring", stiffness: 100 }}
-                viewport={{ once: true }}
-                className="group relative"
+                className="relative h-[280px] flex flex-col justify-end items-center bg-blue-500 border border-gray-200 rounded-2xl p-6 shadow-md hover:shadow-lg hover:scale-105 transition-all duration-500 ease-in-out cursor-pointer"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ delay: index * 0.1, duration: 0.6 }}
               >
-                <div className="relative h-full bg-white border border-blue-100 rounded-3xl p-6 shadow hover:shadow-xl transition-all duration-500">
-                  <div className="relative z-10 flex items-center justify-start gap-4">
-                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center mask-image mask-squircle">
-                      <Icon className="text-white w-6 h-6" />
-                    </div>
-                    <h3 className="text-xl text-left font-semibold text-gray-900">{service.title}</h3>
-                  </div>
-                  <p className="text-gray-600 mb-4 text-left">{service.desc}</p>
-                  <div className="flex flex-wrap gap-2 text-sm text-blue-700">
-                    {service.features.map((feature, i) => (
-                      <p key={i} className="px-2 py-1 bg-blue-100 rounded-full border-2 border-blue-200">
-                        {feature}
-                      </p>
-                    ))}
-                  </div>
+                {/* Top Right Index */}
+                <div className="absolute bottom-4 left-4 text-sm font-semibold text-white/60">
+                  0{index + 1}
+                </div>
+
+                {/* Image floating out of the top */}
+                <div className="absolute bottom-0 right-0 z-10 pointer-events-none">
+                  <img
+                    className="z-30 w-[500px] object-left-top h-[350px] object-cover rounded-b-2xl drop-shadow-xl"
+                    src={atom}
+                    alt=""
+                  />
                 </div>
               </motion.div>
-            )
-          })}
-        </div>
+
+            );
+            }
+          // Default card for other indexes
+            return (
+            <motion.div
+              key={index}
+                className="relative overflow-clip flex flex-col justify-between h-full bg-white/70 backdrop-blur-md border border-gray-200 rounded-2xl p-6 shadow-md hover:shadow-xl  hover:scale-105 transition-all duration-500 ease-in-out cursor-pointer"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ delay: index * 0.1, duration: 0.6 }}
+            >
+              {/* Index in Top-Right */}
+              <div className="absolute top-4 right-4 text-sm font-semibold text-gray-400">
+              0{index + 1}
+              </div>
+
+              {/* Icon and Title */}
+              <div className="relative z-20 bg-zinc-800 p-2 rounded-full text-white flex items-center mb-4 mr-6">
+              <div className="bg-blue-600 rounded-full p-3">
+                <service.icon className="text-white text-2xl" />
+              </div>
+              <h3 className="ml-2 text-md font-semibold text-white w-full">
+                {service.title}
+              </h3>
+              <p>
+                <BiArrowToRight className="text-white text-2xl w-5" />
+              </p>
+              </div>
+              {/* Bottom Line */}
+              <div className="relative z-20 h-px bg-gray-200 mb-4" />
+
+              {/* Description */}
+              <p className="relative z-20 text-sm text-gray-700 mb-6 text-left">
+              {service.desc}
+              </p>
+
+              {/* Feature Tags */}
+              <div className="relative z-20 flex flex-wrap gap-2">
+              {service.features.map((feature, idx) => (
+                <span
+                key={idx}
+                className="bg-blue-100 text-blue-800 text-xs font-medium px-3 py-1 rounded-full hover:bg-blue-200 transition"
+                >
+                {feature}
+                </span>
+              ))}
+              </div>
+            </motion.div>
+            );
+        })}
       </div>
+      <hr className="w-full border-t-2 border-black/10 my-6" />
     </section>
-  )
+  );
 }
 
-export default Services
+export default Services;

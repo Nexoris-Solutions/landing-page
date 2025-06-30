@@ -28,6 +28,13 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "righteous";
+  src: url("../assets/fonts/RussoOne-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
 .font-inter {
   font-family: "Inter", sans-serif;
 }
@@ -44,10 +51,26 @@
   font-family: "montserratUnderline", sans-serif;
 }
 
+.font-righteous {
+  font-family: "righteous", sans-serif;
+}
+
 * {
   font-family: "Inter", sans-serif;
 }
 
 body {
   overflow-x: hidden;
+}
+
+.keen-slider.perspective-1000 {
+  perspective: 1000px;
+}
+
+/* Add this to your global CSS or a module file */
+.cylinder-wrapper {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+  display: flex;
+  justify-content: center;
 }

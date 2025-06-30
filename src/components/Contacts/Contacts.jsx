@@ -1,25 +1,11 @@
-import React, { useState, useEffect } from "react";
-import {
-	FaPaperPlane,
-	FaPhone,
-	FaEnvelope,
-	FaMapMarkerAlt,
-} from "react-icons/fa";
-import { motion, AnimatePresence } from "framer-motion";
-import flower from "../../assets/flower.webm";
-import flower_idle from "../../assets/flower-idle.png";
-import star_top from "../../assets/star_top.webm";
-import star_top_idle from "../../assets/star_top-idle.png";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { HiCheckBadge } from "react-icons/hi2";
+import { BiMailSend } from "react-icons/bi";
 
 export default function Contacts() {
 	const [result, setResult] = useState("");
-	const [supportsWebM, setSupportsWebM] = useState(true);
 	const [status, setStatus] = useState("idle"); // idle | sending | sent | error
-
-	useEffect(() => {
-		const v = document.createElement("video");
-		setSupportsWebM(!!v.canPlayType('video/webm; codecs="vp9"'));
-	}, []);
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
@@ -30,192 +16,154 @@ export default function Contacts() {
 			"access_key",
 			import.meta.env.VITE_WEB3_FORMS_KEY || "c47f3dbb-116f-4c36-98a6-417b69127cd2"
 		);
-		const res = await fetch("https://api.web3forms.com/submit", {
-			method: "POST",
-			body: formData,
-		});
-		const data = await res.json();
 
-		if (data.success) {
-			setStatus("sent");
-			setResult("Message sent successfully!");
-			e.target.reset();
-		} else {
+		try {
+			const res = await fetch("https://api.web3forms.com/submit", {
+				method: "POST",
+				body: formData,
+			});
+			const data = await res.json();
+			if (data.success) {
+				setStatus("sent");
+				setResult("Message sent successfully!");
+				e.target.reset();
+			} else {
+				throw new Error("Submission failed");
+			}
+		} catch {
 			setStatus("error");
-			setResult("Failed to send message.");
+			setResult("Failed to send message. Please try again.");
 		}
 	};
 
-	const handleReset = () => {
-		setStatus("idle");
-		setResult("");
-	};
-
 	return (
-		<section id="contacts" className="relative min-h-screen bg-gradient-to-br from-white via-blue-50 to-indigo-50 px-4 py-10 overflow-hidden">
-			{/* Background Video */}
-			<div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
-				{supportsWebM ? (
-					<video
-						src={flower}
-						autoPlay
-						loop
-						muted
-						playsInline
-						className="w-full h-full object-cover opacity-20"
-					/>
-				) : (
-					<img
-						src={flower_idle}
-						alt="Decor"
-						className="w-full h-full object-cover opacity-20"
-					/>
-				)}
+		<section
+			id="contact"
+			className="relative max-w-7xl w-full bg-white py-8 mx-auto px-4 lg:px-8"
+		>
+			<div className="flex flex-col lg:flex-row justify-between items-start lg:items-center w-full mb-12 gap-6">
+				<h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-righteous text-gray-800 flex-1">
+					Talk Tech With Us
+				</h2>
+				<div className="flex-1 bg-blue-500 text-white p-4 md:p-6 rounded-xl flex flex-col md:flex-row items-start md:items-center gap-4">
+					<HiCheckBadge className="text-white text-6xl flex-shrink-0" />
+					<p className="text-sm sm:text-md md:text-base">
+						Ready to accelerate your roadmap or explore cutting‑edge tech? Tell us about your vision; our DevOps, full‑stack, and AI engineers are standing by to make it real.
+					</p>
+				</div>
 			</div>
 
-			{/* Header */}
-			<motion.div
-				initial={{ opacity: 0, y: 30 }}
+			<motion.form
+				onSubmit={onSubmit}
+				className="relative backdrop-blur-lg bg-white/70 p-6 md:p-8 border-t-2 border-gray-200 rounded-xl shadow-2xl grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8"
+				initial={{ opacity: 0, y: 40 }}
 				whileInView={{ opacity: 1, y: 0 }}
-				transition={{ duration: 0.8 }}
 				viewport={{ once: true }}
-				className="relative z-10 text-center mb-12"
+				transition={{ duration: 0.6, ease: "easeOut" }}
 			>
-				<div className="inline-flex items-center space-x-3">
-					<motion.h2
-						initial={{ opacity: 0, y: 20 }}
-						animate={{ opacity: 1, y: 0 }}
-						transition={{ delay: 0.3, duration: 0.6 }}
-						className="text-3xl font-unbound sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-blue-500"
-						style={{ backgroundSize: "200% 200%" }}
+				{/* Name */}
+				<div className="flex flex-col">
+					<label htmlFor="name" className="mb-2 text-gray-700 font-medium">
+						Your Name
+					</label>
+					<input
+						id="name"
+						name="name"
+						type="text"
+						required
+						placeholder="Jane Doe"
+						className="p-4 border-b-2 bg-zinc-50 border-gray-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-200 transition w-full"
+					/>
+				</div>
+
+				{/* Email */}
+				<div className="flex flex-col">
+					<label htmlFor="email" className="mb-2 text-gray-700 font-medium">
+						Email Address
+					</label>
+					<input
+						id="email"
+						name="email"
+						type="email"
+						required
+						placeholder="you@example.com"
+						className="p-4 border-b-2 bg-zinc-50 border-gray-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-200 transition w-full"
+					/>
+				</div>
+
+				{/* Phone */}
+				<div className="flex flex-col">
+					<label htmlFor="phone" className="mb-2 text-gray-700 font-medium">
+						Phone (optional)
+					</label>
+					<input
+						id="phone"
+						name="phone"
+						type="tel"
+						placeholder="+1 (555) 123‑4567"
+						className="p-4 border-b-2 bg-zinc-50 border-gray-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-200 transition w-full"
+					/>
+				</div>
+
+				{/* Subject */}
+				<div className="flex flex-col">
+					<label htmlFor="subject" className="mb-2 text-gray-700 font-medium">
+						Subject
+					</label>
+					<input
+						id="subject"
+						name="subject"
+						type="text"
+						required
+						placeholder="Project Inquiry"
+						className="p-4 border-b-2 bg-zinc-50 border-gray-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-200 transition w-full"
+					/>
+				</div>
+
+				{/* Message */}
+				<div className="md:col-span-2 flex flex-col">
+					<label htmlFor="message" className="mb-2 text-gray-700 font-medium">
+						Your Message
+					</label>
+					<textarea
+						id="message"
+						name="message"
+						rows="5"
+						required
+						placeholder="Tell us more about your project…"
+						className="p-4 border-b-2 bg-zinc-50 border-gray-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-200 transition resize-none w-full"
+					/>
+				</div>
+
+				{/* Submit & Feedback */}
+				<div className="md:col-span-2 flex flex-col items-center">
+					<motion.button
+						type="submit"
+						disabled={status === "sending"}
+						className="group flex items-center bg-zinc-800 text-white font-semibold p-1 rounded-full shadow-lg hover:scale-105 active:scale-95 transition-transform disabled:opacity-50 disabled:cursor-not-allowed"
+						whileTap={{ scale: 0.95 }}
 					>
-						Get in Touch
-					</motion.h2>
-					{supportsWebM ? (
-						<video
-							src={star_top}
-							autoPlay
-							loop
-							muted
-							playsInline
-							className="w-16 sm:w-18 md:w-20 object-contain"
-						/>
-					) : (
-						<img
-							src={star_top_idle}
-							alt="Star"
-							className="w-16 sm:w-18 md:w-20 object-contain"
-						/>
+						<div className="group-hover:animate-pulse flex items-center justify-center p-2 bg-blue-500 rounded-full shadow-md transition-all duration-500 ease-in-out">
+							<BiMailSend className="text-3xl" />
+						</div>
+						<p className="text-lg font-medium px-2 w-44">
+							{{
+								idle: "Send Message",
+								sending: "Sending…",
+								sent: "Sent!",
+								error: "Try Again",
+							}[status]}
+						</p>
+					</motion.button>
+
+					{result && (
+						<div className="mt-4 flex items-center text-sm text-gray-800">
+							<HiCheckBadge className={`text-${status === "error" ? "red" : "green"}-500 mr-2`} />
+							<span>{result}</span>
+						</div>
 					)}
 				</div>
-				<motion.div
-					className="h-1 w-28 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full my-4 mx-auto"
-					initial={{ width: 0 }}
-					animate={{ width: 112 }}
-					transition={{ duration: 1 }}
-				/>
-				<p className="text-lg text-gray-700 max-w-xl mx-auto">
-					We’re here to help with anything you need. Send us a message!
-				</p>
-			</motion.div>
-
-			{/* Main Grid */}
-			<div className="relative z-10 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-				{/* Form Card */}
-				<div className="relative bg-white/20 backdrop-blur-lg border border-white/30 rounded-3xl shadow-lg p-8 hover:bg-white/25 transition">
-					<form onSubmit={onSubmit} className="space-y-6">
-						<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-							{[
-								{ name: 'name', type: 'text', placeholder: 'John Doe', label: 'Name' },
-								{ name: 'email', type: 'email', placeholder: 'you@example.com', label: 'Email' },
-							].map((field) => (
-								<div key={field.name}>
-									<label className="block text-sm text-blue-900 mb-1">
-										{field.label}
-									</label>
-									<input
-										name={field.name}
-										type={field.type}
-										required
-										placeholder={field.placeholder}
-										className="w-full px-4 py-2 bg-white/40 border border-white/40 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-300 text-black placeholder-gray-600"
-									/>
-								</div>
-							))}
-						</div>
-						{[
-							{ name: 'phone', type: 'tel', placeholder: '+1 234 567 8900', label: 'Phone' },
-							{ name: 'subject', type: 'text', placeholder: 'Subject', label: 'Subject' },
-						].map((field) => (
-							<div key={field.name}>
-								<label className="block text-sm text-blue-900 mb-1">
-									{field.label}
-								</label>
-								<input
-									name={field.name}
-									type={field.type}
-									placeholder={field.placeholder}
-									className="w-full px-4 py-2 bg-white/40 border border-white/40 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-300 text-black placeholder-gray-600"
-								/>
-							</div>
-						))}
-						<div>
-							<label className="block text-sm text-blue-900 mb-1">Message</label>
-							<textarea
-								name="message"
-								rows="4"
-								required
-								placeholder="Your message..."
-								className="w-full px-4 py-2 bg-white/40 border border-white/40 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-300 text-black placeholder-gray-600"
-							/>
-						</div>
-						<button
-							type="submit"
-							disabled={status === 'sending'}
-							className="w-full py-3 bg-gradient-to-r from-blue-600 to-indigo-700 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-indigo-800 transition flex items-center justify-center space-x-2"
-						>
-							{status === 'idle' ? <FaPaperPlane /> : null}
-							<span>
-								{status === 'idle' && 'Send Message'}
-								{status === 'sending' && 'Sending...'}
-								{status === 'sent' && 'Sent!'}
-								{status === 'error' && 'Try Again'}
-							</span>
-						</button>
-						{result && (
-							<p className={`text-center mt-2 ${status === 'error' ? 'text-red-600' : 'text-green-600'}`}>
-								{result}
-							</p>
-						)}
-					</form>
-				</div>
-
-				{/* Contact Info Card */}
-				<div className="relative bg-white/20 backdrop-blur-lg border border-white/30 rounded-3xl shadow-lg p-8 space-y-6 hover:bg-white/25 transition">
-					<h3 className="text-2xl font-semibold text-indigo-800">Contact Info</h3>
-					{[
-						{ icon: <FaPhone />, label: 'Phone', value: '+91 7094296432' },
-						{ icon: <FaEnvelope />, label: 'Email', value: 'admin@nexoris.in' },
-						{ icon: <FaMapMarkerAlt />, label: 'Address', value: 'Coimbatore, Tamil Nadu, India' },
-					].map((item, i) => (
-						<div key={i} className="flex items-start space-x-4">
-							<div className="text-indigo-600 mt-1">{item.icon}</div>
-							<div>
-								<p className="text-sm font-medium text-blue-900">{item.label}</p>
-								<p className="text-black text-sm">{item.value}</p>
-							</div>
-						</div>
-					))}
-					<div className="w-full h-64 rounded-xl overflow-hidden mt-4 border border-white/40">
-						<iframe
-							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15666.203417854516!2d76.93951048715823!3d10.997234999999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba8599f9149e7c7%3A0xbdcffd823bdd9c3b!2sNexoris!5e0!3m2!1sen!2sin!4v1751199176553!5m2!1sen!2sin"
-							className="w-full h-full"
-							allowFullScreen
-							loading="lazy"
-						/>
-					</div>
-				</div>
-			</div>
+			</motion.form>
 		</section>
 	);
 }

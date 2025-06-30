@@ -7,7 +7,6 @@ import Contacts from "../../components/Contacts/Contacts";
 import About from "../../components/About/About";
 import Members from "../../components/Members/Members";
 
-
 function Landing() {
 	return (
 		<motion.div
