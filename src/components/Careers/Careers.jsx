@@ -54,7 +54,7 @@ function Careers() {
         <div className='relative h-[450px] w-full flex flex-col items-start justify-end bg-zinc-800 rounded-xl text-white p-3 md:p-8'>
           {/* atom image */}
           <img
-            className="absolute bottom-0 z-10 w-full h-[450px] object-contain object-bottom-right -translate-x-8 rounded-br-xl drop-shadow-[0_0_20px_rgba(0,0,0,0.5)]"
+            className="absolute bottom-0 z-10 w-full h-[450px] object-contain object-bottom-right -translate-x-3 sm:-translate-x-5 md:-translate-x-8 rounded-br-xl drop-shadow-[0_0_20px_rgba(0,0,0,0.5)]"
             src={atom}
             alt="atom"
           />
@@ -77,7 +77,7 @@ function Careers() {
             </div>
             <motion.div
               initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.2 }}
               className="text-4xl md:text-5xl font-bold font-poppins-bold text-white flex flex-row gap-3"
             >
@@ -88,7 +88,7 @@ function Careers() {
                 openings.map((item, index) => (
                   <motion.p
                     initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1, delay: index * 0.2 }}
                     key={index} className="relative flex gap-2 items-center bg-purple-600 hover:bg-purple-700 px-2 py-1 md:px-4 md:py-2 tet-xs md:text-sm rounded-xl text-md font-semibold font-poppins transition-all ease-in-out duration-300">
                     {item} <RiStarFill className='animate-spin hidden md:inline' />
@@ -112,7 +112,7 @@ function Careers() {
               perks.map((item, index) => (
                 <motion.p
                   initial={{ opacity: 0, y: 15 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 1, delay: index * 0.2 }}
                   key={index} className="relative bg-gradient-to-br from-orange-500 to-orange-600 py-2 px-4 pr-7 text-sm rounded-xl text-md font-poppins flex items-center gap-2 transition-all ease-in-out duration-500">
                   {item}
