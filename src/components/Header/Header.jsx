@@ -155,7 +155,7 @@ function Header() {
               animate={{ opacity: 0.4 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
-              className="fixed inset-0 bg-black z-40 overflow-x-auto"
+              className="fixed inset-0 bg-black z-40"
             />
 
             {/* Sidebar */}
@@ -179,8 +179,13 @@ function Header() {
                 <RiCloseLine size={20} />
               </button>
 
-              {/* Nav Icons */}
-              <nav className="flex flex-col gap-6 mt-2 pl-2 z-10">
+              {/* Nav Icons - Make scrollable */}
+              <nav
+                className="flex flex-col gap-6 mt-2 pl-2 z-10 overflow-y-auto custom-scrollbar"
+                style={{
+                  maxHeight: "calc(100vh - 120px)",
+                }}
+              >
                 {navItems.map((item, index) => (
                   <motion.button
                     key={item.label}
@@ -225,6 +230,21 @@ function Header() {
                 ))}
               </nav>
             </motion.aside>
+            {/* Custom scrollbar styles */}
+            <style>{`
+              .custom-scrollbar::-webkit-scrollbar {
+                width: 6px;
+                background: #18181b;
+              }
+              .custom-scrollbar::-webkit-scrollbar-thumb {
+                background: #444;
+                border-radius: 4px;
+              }
+              .custom-scrollbar {
+                scrollbar-width: thin;
+                scrollbar-color: #444 #18181b;
+              }
+            `}</style>
           </>
         )}
       </AnimatePresence>

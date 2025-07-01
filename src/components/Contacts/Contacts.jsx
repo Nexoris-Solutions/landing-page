@@ -47,6 +47,9 @@ export default function Contacts() {
 			id="contact"
 			className="relative max-w-7xl w-full bg-white py-8 mx-auto px-4 lg:px-8"
 		>
+			{/* Top Divider */}
+			<hr className="w-full border-t-2 border-black/10 my-6" />
+
 			<div className="flex flex-col md:flex-row justify-between items-center w-full mb-12">
 				<motion.h2
 					initial={{ opacity: 0, x: -30 }}
