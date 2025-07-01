@@ -6,6 +6,7 @@ import Services from "../../components/Services/Services";
 import Contacts from "../../components/Contacts/Contacts";
 import About from "../../components/About/About";
 import Members from "../../components/Members/Members";
+import Careers from "../../components/Careers/Careers";
 
 function Landing() {
 	return (
@@ -19,6 +20,7 @@ function Landing() {
 			<About />
 			<Services />
 			<Members />
+			<Careers />
 			<Contacts />
 			<Footer />
 		</motion.div>
